@@ -210,16 +210,16 @@ const QuestCard = ({ quest, onComplete, specialStyle, isOpen, onToggle }) => {
       {/* Main card row */}
       <div
         onClick={onToggle}
-        className={`glass-card p-4 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-all select-none ${specialStyle ? 'border-tertiary-container/30' : ''} ${isOpen ? 'rounded-b-none border-b-0' : ''}`}
+        className={`glass-card py-2.5 px-3 flex items-center gap-3 cursor-pointer active:scale-[0.98] transition-all select-none ${specialStyle ? 'border-tertiary-container/30' : ''} ${isOpen ? 'rounded-b-none border-b-0' : ''}`}
       >
-        <div className={`w-12 h-12 rounded-lg flex items-center justify-center border shrink-0 ${specialStyle ? 'border-tertiary-container/50 bg-tertiary/10 text-tertiary' : 'bg-surface-container-high text-primary border-outline-variant'}`}>
-          <Icon name={quest.icon} />
+        <div className={`w-9 h-9 rounded-lg flex items-center justify-center border shrink-0 ${specialStyle ? 'border-tertiary-container/50 bg-tertiary/10 text-tertiary' : 'bg-surface-container-high text-primary border-outline-variant'}`}>
+          <Icon name={quest.icon} className="text-[20px]" />
         </div>
         <div className="flex-1">
-          <h4 className="font-semibold text-sm text-on-surface">{quest.title}</h4>
+          <h4 className="font-semibold text-sm text-on-surface leading-tight">{quest.title}</h4>
           <div className={`${specialStyle ? 'text-tertiary' : 'text-primary'} font-semibold text-xs`}>${quest.reward}</div>
         </div>
-        <Icon name={isOpen ? "expand_less" : "expand_more"} className="text-on-surface-variant opacity-50" />
+        <Icon name={isOpen ? "expand_less" : "expand_more"} className="text-on-surface-variant opacity-50 text-[20px]" />
       </div>
 
       {/* Confirm action row */}
@@ -246,9 +246,9 @@ const QuestCard = ({ quest, onComplete, specialStyle, isOpen, onToggle }) => {
 const QuestsPage = ({ quests, onCompleteQuest }) => {
   const [openQuestId, setOpenQuestId] = useState(null);
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-on-surface mb-4">可接任務</h2>
-      <div className="space-y-3">
+    <div>
+      <h2 className="text-lg font-bold text-on-surface mb-3">可接任務</h2>
+      <div className="space-y-2">
         {quests.map((quest) => (
           <QuestCard
             key={quest.id}
@@ -617,7 +617,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className={`flex-1 px-4 w-full overflow-hidden ${activeTab === 'dashboard' ? 'pt-4 pb-4 flex flex-col' : 'pt-6 pb-28 overflow-y-auto'}`}>
+      <main className={`flex-1 px-4 w-full overflow-hidden ${activeTab === 'dashboard' ? 'pt-4 pb-0 flex flex-col' : 'pt-5 pb-2 overflow-y-auto'}`}>
         {isLoading ? (
           <div className="flex flex-col items-center justify-center h-full gap-4 text-on-surface-variant">
             <div className="w-10 h-10 rounded-full border-4 border-primary-container border-t-transparent animate-spin" />
@@ -626,7 +626,7 @@ export default function App() {
         ) : renderContent()}
       </main>
 
-      <nav className="absolute bottom-0 left-0 w-full bg-surface-container border-t border-outline-variant/30 flex justify-around p-2 pb-3 z-40">
+      <nav className="w-full bg-surface-container border-t border-outline-variant/30 flex justify-around p-2 pb-[max(12px,env(safe-area-inset-bottom))] z-40">
         <button onClick={() => setActiveTab('dashboard')} className={`flex flex-col items-center justify-center w-16 p-2 transition-transform active:scale-90 ${activeTab === 'dashboard' ? 'bg-primary-container text-on-primary-container rounded-xl' : 'text-on-surface-variant hover:text-primary'}`}>
           <Icon name="dashboard" filled={activeTab === 'dashboard'} />
           <span className="text-xs mt-1">總覽</span>
