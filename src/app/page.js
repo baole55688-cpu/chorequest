@@ -82,9 +82,9 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
   const nextMonth = () => setCurrentViewDate(new Date(currentYear, currentMonth + 1, 1));
 
   return (
-    <div className="space-y-3">
-      <section>
-        <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant relative overflow-hidden group">
+    <div className="flex flex-col gap-3 h-full flex-1">
+      <section className="flex-1 flex flex-col">
+        <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant relative overflow-hidden group flex-1 flex flex-col justify-center">
           {/* Two stats side by side */}
           <div className="flex items-stretch gap-4">
             <div className="flex-1">
@@ -117,7 +117,7 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant">
+      <section className="flex-1 bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant flex flex-col justify-center">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Icon name="calendar_month" className="text-primary-container" />
@@ -177,7 +177,7 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant">
+      <section className="flex-1 bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant flex flex-col justify-center">
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center gap-2">
             <Icon name="restaurant" filled className="text-tertiary-container" />
@@ -617,7 +617,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-scroll px-4 pt-6 pb-32 w-full">
+      <main className={`flex-1 px-4 w-full overflow-hidden ${activeTab === 'dashboard' ? 'pt-4 pb-4 flex flex-col' : 'pt-6 pb-28 overflow-y-auto'}`}>
         {isLoading ? (
           <div className="flex flex-col items-center justify-center h-full gap-4 text-on-surface-variant">
             <div className="w-10 h-10 rounded-full border-4 border-primary-container border-t-transparent animate-spin" />
