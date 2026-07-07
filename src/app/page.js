@@ -83,32 +83,40 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
 
   return (
     <div className="space-y-6">
-      <section className="grid grid-cols-1 gap-4">
-        <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-6 rounded-xl border border-outline-variant flex flex-col justify-between relative overflow-hidden group min-h-[160px]">
-          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Icon name="payments" filled className="text-[80px]" />
+      <section>
+        <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-5 rounded-xl border border-outline-variant relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-5 opacity-5 group-hover:opacity-10 transition-opacity">
+            <Icon name="payments" filled className="text-[100px] text-primary-container" />
           </div>
-          <div>
-            <p className="font-semibold text-sm text-on-surface-variant mb-1">總收入 (Total Revenue)</p>
-            <h2 className="text-5xl font-bold text-primary-container">${totalEarnings}</h2>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-6 rounded-xl border border-outline-variant flex flex-col justify-between min-h-[160px]">
-          <div>
-            <p className="font-semibold text-sm text-on-surface-variant mb-1">待領取獎勵 (Pending Rewards)</p>
-            <div className="flex items-center gap-2">
-              <Icon name="account_balance_wallet" filled className="text-primary-container" />
-              <h2 className="text-3xl font-bold text-on-surface">${pendingRewards.toFixed(2)}</h2>
+          {/* Two stats side by side */}
+          <div className="flex items-stretch gap-4">
+            <div className="flex-1">
+              <p className="text-xs font-semibold text-on-surface-variant mb-1">總收入</p>
+              <h2 className="text-4xl font-bold text-primary-container leading-none">${totalEarnings}</h2>
+            </div>
+            <div className="w-px bg-outline-variant/50 self-stretch" />
+            <div className="flex-1">
+              <p className="text-xs font-semibold text-on-surface-variant mb-1">待領取</p>
+              <div className="flex items-center gap-1.5">
+                <Icon name="account_balance_wallet" filled className="text-primary-container text-[20px]" />
+                <h2 className="text-4xl font-bold text-on-surface leading-none">${pendingRewards.toFixed(0)}</h2>
+              </div>
             </div>
           </div>
-          <button 
+          {/* Redeem button */}
+          <button
             onClick={handleRedeemClick}
-            className={`mt-4 w-full py-2 rounded-lg font-semibold transition-all active:scale-95 flex items-center justify-center gap-2 ${pendingRewards <= 0 ? 'bg-surface-variant text-on-surface-variant opacity-50 cursor-not-allowed' : redeemUnlocked ? 'bg-green-600 text-white hover:bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'bg-primary-container text-on-primary-container hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'}`}
+            className={`mt-4 w-full py-2.5 rounded-lg font-semibold transition-all active:scale-95 flex items-center justify-center gap-2 text-sm ${
+              pendingRewards <= 0
+                ? 'bg-surface-variant text-on-surface-variant opacity-40 cursor-not-allowed'
+                : redeemUnlocked
+                ? 'bg-green-600 text-white hover:bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.3)]'
+                : 'bg-primary-container text-on-primary-container hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+            }`}
             disabled={pendingRewards <= 0}
           >
-            <Icon name={redeemUnlocked ? "lock_open" : "lock"} className="text-[18px]" />
-            {redeemUnlocked ? '確認兌換' : '立即兌換'}
+            <Icon name={redeemUnlocked ? "lock_open" : "lock"} className="text-[16px]" />
+            {redeemUnlocked ? '確認兌換（將入總收入）' : '立即兌換'}
           </button>
         </div>
       </section>
@@ -632,7 +640,7 @@ export default function App() {
         ) : renderContent()}
       </main>
 
-      <nav className="absolute bottom-0 left-0 w-full bg-surface-container border-t border-outline-variant/30 flex justify-around p-2 pb-6 z-40">
+      <nav className="absolute bottom-0 left-0 w-full bg-surface-container border-t border-outline-variant/30 flex justify-around p-2 pb-3 z-40">
         <button onClick={() => setActiveTab('dashboard')} className={`flex flex-col items-center justify-center w-16 p-2 transition-transform active:scale-90 ${activeTab === 'dashboard' ? 'bg-primary-container text-on-primary-container rounded-xl' : 'text-on-surface-variant hover:text-primary'}`}>
           <Icon name="dashboard" filled={activeTab === 'dashboard'} />
           <span className="text-xs mt-1">總覽</span>
