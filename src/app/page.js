@@ -311,6 +311,24 @@ const HistoryPage = ({ history, onUndo }) => (
   </div>
 );
 
+const Toast = ({ message, onClose }) => {
+  useEffect(() => {
+    const t = setTimeout(onClose, 3500);
+    return () => clearTimeout(t);
+  }, [onClose]);
+  return (
+    <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-2rem)] max-w-sm">
+      <div className="bg-[#3B1F1F] border border-error/50 text-on-surface rounded-xl px-4 py-3 flex items-start gap-3 shadow-2xl animate-[fadeInUp_0.3s_ease]">
+        <span className="material-symbols-outlined text-error text-[22px] shrink-0 mt-0.5">error</span>
+        <p className="text-sm font-medium leading-snug">{message}</p>
+        <button onClick={onClose} className="ml-auto text-on-surface-variant hover:text-error shrink-0">
+          <span className="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [totalEarnings, setTotalEarnings] = useState(0);
@@ -321,6 +339,7 @@ export default function App() {
   const [selectedDayDetail, setSelectedDayDetail] = useState(null);
   const [showMakeupSelection, setShowMakeupSelection] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [toastMessage, setToastMessage] = useState(null);
 
   // 從 Supabase 載入資料
   useEffect(() => {
@@ -518,18 +537,30 @@ export default function App() {
   };
 
   const handleUndoQuest = (historyItem) => {
+    // 取消「兌換獎金」紀錄：把錢從總收入退回待領取
     if (historyItem.isRedeem) {
-      setTotalEarnings(prev => prev - historyItem.reward);
-      setPendingRewards(prev => prev + historyItem.reward);
+      const newEarnings = totalEarnings - historyItem.reward;
+      const newPending = pendingRewards + historyItem.reward;
+      setTotalEarnings(newEarnings);
+      setPendingRewards(newPending);
       setHistory(prev => prev.filter(item => item.id !== historyItem.id));
+      removeHistoryFromDb(historyItem.id);
+      syncStats(newEarnings, newPending, dishwashStats);
       return;
     }
-    setPendingRewards(prev => {
-      if (prev >= historyItem.reward) return prev - historyItem.reward;
-      setTotalEarnings(t => t - (historyItem.reward - prev));
-      return 0;
-    });
+
+    // 取消一般任務：檢查此任務的獎勵是否已超出待領取（即部分或全部已兌換）
+    if (pendingRewards < historyItem.reward) {
+      // 若扣完待領取還不夠，表示這筆任務已經被兌換進總收入
+      // 阻止操作，要求使用者先取消兌換紀錄
+      setToastMessage('此任務獎勵已兌換入總收入，請先在歷史紀錄中取消「兌換獎金」，再退回此任務。');
+      return;
+    }
+
+    const newPending = pendingRewards - historyItem.reward;
+    setPendingRewards(newPending);
     setHistory(prev => prev.filter(item => item.id !== historyItem.id));
+
     if (historyItem.originalQuest && !historyItem.originalQuest.isRepeatable && !historyItem.isMakeup) {
       setQuests(prev => {
         if (!prev.find(q => q.id === historyItem.originalQuest.id)) {
@@ -542,20 +573,18 @@ export default function App() {
         return prev;
       });
     }
+
     if (historyItem.title === '洗碗盤') {
       const remainingHistory = history.filter(item => item.id !== historyItem.id);
       const newStats = recalculateStreak(remainingHistory);
       setDishwashStats(newStats);
-    } else if (historyItem.prevDishwashStats) {
-      setDishwashStats(historyItem.prevDishwashStats);
+      removeHistoryFromDb(historyItem.id);
+      syncStats(totalEarnings, newPending, newStats);
+    } else {
+      if (historyItem.prevDishwashStats) setDishwashStats(historyItem.prevDishwashStats);
+      removeHistoryFromDb(historyItem.id);
+      syncStats(totalEarnings, newPending, historyItem.prevDishwashStats || dishwashStats);
     }
-
-    // Sync to Supabase
-    removeHistoryFromDb(historyItem.id);
-    const newPending = historyItem.isRedeem ? (pendingRewards + historyItem.reward) : Math.max(0, pendingRewards - historyItem.reward);
-    const newEarnings = historyItem.isRedeem ? (totalEarnings - historyItem.reward) : (pendingRewards >= historyItem.reward ? totalEarnings : totalEarnings - (historyItem.reward - pendingRewards));
-    const undoStats = historyItem.title === '洗碗盤' ? recalculateStreak(history.filter(i => i.id !== historyItem.id)) : dishwashStats;
-    syncStats(newEarnings, newPending, undoStats);
   };
 
   const handleRedeem = () => {
@@ -708,6 +737,7 @@ export default function App() {
           </div>
         </div>
       )}
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
     </div>
   );
 }

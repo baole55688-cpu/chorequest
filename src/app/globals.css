@@ -28,6 +28,11 @@
   }
 }
 
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, 16px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
 /* 隱藏所有捲軸但保留捲動功能 */
 ::-webkit-scrollbar {
   display: none;
