@@ -82,9 +82,9 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
   const nextMonth = () => setCurrentViewDate(new Date(currentYear, currentMonth + 1, 1));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <section>
-        <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-5 rounded-xl border border-outline-variant relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant relative overflow-hidden group">
           {/* Two stats side by side */}
           <div className="flex items-stretch gap-4">
             <div className="flex-1">
@@ -102,7 +102,7 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
           {/* Redeem button */}
           <button
             onClick={handleRedeemClick}
-            className={`mt-4 w-full py-2.5 rounded-lg font-semibold transition-all active:scale-95 flex items-center justify-center gap-2 text-sm ${
+            className={`mt-3 w-full py-2 rounded-lg font-semibold transition-all active:scale-95 flex items-center justify-center gap-2 text-sm ${
               pendingRewards <= 0
                 ? 'bg-surface-variant text-on-surface-variant opacity-40 cursor-not-allowed'
                 : redeemUnlocked
@@ -117,22 +117,22 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-6 rounded-xl border border-outline-variant">
-        <div className="flex items-center justify-between mb-4">
+      <section className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant">
+        <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Icon name="calendar_month" className="text-primary-container" />
-            <h3 className="text-xl font-bold text-on-surface">{currentYear}年 {currentMonth + 1}月</h3>
+            <h3 className="text-base font-bold text-on-surface">{currentYear}年 {currentMonth + 1}月</h3>
           </div>
           <div className="flex gap-2">
             <button onClick={prevMonth} className="p-1 rounded bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest"><Icon name="chevron_left" /></button>
             <button onClick={nextMonth} className="p-1 rounded bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest"><Icon name="chevron_right" /></button>
           </div>
         </div>
-        <div className="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-on-surface-variant mb-2">
+        <div className="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-on-surface-variant mb-1">
           <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
         </div>
         <div className="grid grid-cols-7 gap-1">
-          {emptyDays.map(d => <div key={`empty-${d}`} className="h-8"></div>)}
+          {emptyDays.map(d => <div key={`empty-${d}`} className="h-7"></div>)}
           {days.map(d => {
             const status = dayStatusMap[d];
             const isToday = d === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear();
@@ -162,7 +162,7 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
               <div 
                 key={d} 
                 onClick={() => onDayClick(new Date(currentYear, currentMonth, d))}
-                className={`h-9 flex flex-col items-center justify-center rounded-full text-sm transition-all cursor-pointer hover:opacity-80 relative ${cellClass}`}
+                className={`h-7 flex flex-col items-center justify-center rounded-full text-xs transition-all cursor-pointer hover:opacity-80 relative ${cellClass}`}
               >
                 <span className="text-[13px] leading-none">{d}</span>
                 {dotColor && <span className={`w-1 h-1 rounded-full mt-0.5 ${dotColor}`} />}
@@ -170,24 +170,24 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
             );
           })}
         </div>
-        <div className="flex items-center justify-center gap-4 mt-3 text-[11px] text-on-surface-variant">
+        <div className="flex items-center justify-center gap-4 mt-2 text-[10px] text-on-surface-variant">
           <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-primary-container inline-block" />未結清</div>
           <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />部分結清</div>
           <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400 inline-block" />已結清</div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-6 rounded-xl border border-outline-variant">
-        <div className="flex justify-between items-center mb-4">
+      <section className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-4 rounded-xl border border-outline-variant">
+        <div className="flex justify-between items-center mb-2">
           <div className="flex items-center gap-2">
             <Icon name="restaurant" filled className="text-tertiary-container" />
-            <h3 className="text-xl font-bold text-on-surface">每日洗碗挑戰</h3>
+            <h3 className="text-base font-bold text-on-surface">每日洗碗挑戰</h3>
           </div>
           <span className="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full text-xs font-semibold shrink-0 ml-2">
             Day {streak > 0 ? streak : 0}
           </span>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           <div className="flex justify-between text-sm font-semibold text-on-surface-variant">
             <span>進度: {displayStreak} / 3 天</span>
             <span>{percentage}%</span>
