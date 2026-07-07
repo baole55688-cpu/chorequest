@@ -193,86 +193,64 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
             <span>{percentage}%</span>
           </div>
           <div className="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden">
-            <div className="h-full bg-primary-container transition-all duration-700" style={{ width: `${percentage}%` }}></div>
-          </div>
-          <p className="text-on-surface-variant text-sm mt-1 italic">
-            "持續保持，第三天起每次可獲額外加給！"
-          </p>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-const SwipeableQuest = ({ quest, onComplete, specialStyle }) => {
-  const [showActions, setShowActions] = useState(false);
-  const touchStartX = React.useRef(null);
-
-  const handlePointerDown = (e) => {
-    touchStartX.current = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0].clientX);
-  };
-  
-  const handlePointerUp = (e) => {
-    if (touchStartX.current === null) return;
-    const clientX = e.clientX !== undefined ? e.clientX : (e.changedTouches && e.changedTouches[0].clientX);
-    const diff = touchStartX.current - clientX;
-    
-    if (diff > 40) setShowActions(true);
-    if (diff < -40) setShowActions(false);
-    touchStartX.current = null;
-  };
-
+            <div className="h-full bg-primary-container traconst QuestCard = ({ quest, onComplete, specialStyle, isOpen, onToggle }) => {
   return (
-    <div className="relative overflow-hidden rounded-xl">
-      {/* Background Actions */}
-      <div className="absolute inset-y-0 right-0 flex border border-outline-variant/30 rounded-xl overflow-hidden">
-         <button onClick={() => setShowActions(false)} className="bg-surface-variant text-on-surface w-[70px] flex flex-col items-center justify-center font-semibold text-xs active:bg-surface-container-highest">
-           <Icon name="close" className="mb-1" />
-           取消
-         </button>
-         <button onClick={() => { setShowActions(false); onComplete(quest); }} className={`w-[70px] flex flex-col items-center justify-center font-semibold text-xs ${specialStyle ? 'bg-tertiary-container text-on-tertiary-container' : 'bg-primary-container text-on-primary-container'}`}>
-           <Icon name="check" className="mb-1" />
-           完成
-         </button>
+    <div className="rounded-xl overflow-hidden">
+      {/* Main card row */}
+      <div
+        onClick={onToggle}
+        className={`glass-card p-4 flex items-center gap-4 cursor-pointer active:scale-[0.98] transition-all select-none ${specialStyle ? 'border-tertiary-container/30' : ''} ${isOpen ? 'rounded-b-none border-b-0' : ''}`}
+      >
+        <div className={`w-12 h-12 rounded-lg flex items-center justify-center border shrink-0 ${specialStyle ? 'border-tertiary-container/50 bg-tertiary/10 text-tertiary' : 'bg-surface-container-high text-primary border-outline-variant'}`}>
+          <Icon name={quest.icon} />
+        </div>
+        <div className="flex-1">
+          <h4 className="font-semibold text-sm text-on-surface">{quest.title}</h4>
+          <div className={`${specialStyle ? 'text-tertiary' : 'text-primary'} font-semibold text-xs`}>${quest.reward}</div>
+        </div>
+        <Icon name={isOpen ? "expand_less" : "expand_more"} className="text-on-surface-variant opacity-50" />
       </div>
 
-      {/* Foreground Item */}
-      <div 
-        className={`glass-card p-4 flex items-center gap-4 transition-transform duration-300 relative z-10 cursor-grab active:cursor-grabbing ${showActions ? '-translate-x-[140px]' : 'translate-x-0'} ${specialStyle ? 'border-tertiary-container/30' : ''}`}
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={handlePointerUp}
-        onTouchStart={handlePointerDown}
-        onTouchEnd={handlePointerUp}
-      >
-          <div className={`w-12 h-12 rounded-lg flex items-center justify-center border ${specialStyle ? 'border-tertiary-container/50 bg-tertiary/10 text-tertiary' : 'bg-surface-container-high text-primary border-outline-variant'}`}>
-            <Icon name={quest.icon} />
-          </div>
-          <div className="flex-1 select-none">
-            <h4 className="font-semibold text-sm text-on-surface">{quest.title}</h4>
-            <div className={`${specialStyle ? 'text-tertiary' : 'text-primary'} font-semibold text-xs`}>${quest.reward}</div>
-          </div>
-          <Icon name="swipe_left" className="text-on-surface-variant opacity-50" />
-      </div>
+      {/* Confirm action row */}
+      {isOpen && (
+        <div className={`flex border border-t-0 rounded-b-xl overflow-hidden border-outline-variant/30 ${specialStyle ? 'border-tertiary-container/30' : ''}`}>
+          <button
+            onClick={onToggle}
+            className="flex-1 py-3 flex items-center justify-center gap-2 text-sm font-semibold text-on-surface-variant bg-surface-variant hover:bg-surface-container-highest active:scale-95 transition-all"
+          >
+            <Icon name="close" className="text-[16px]" />取消
+          </button>
+          <button
+            onClick={() => { onComplete(quest); onToggle(); }}
+            className={`flex-1 py-3 flex items-center justify-center gap-2 text-sm font-bold active:scale-95 transition-all ${specialStyle ? 'bg-tertiary-container text-on-tertiary-container' : 'bg-primary-container text-on-primary-container'}`}
+          >
+            <Icon name="check" className="text-[16px]" />完成 +${quest.reward}
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
-const QuestsPage = ({ quests, onCompleteQuest }) => (
-  <div className="space-y-6">
-    <h2 className="text-2xl font-bold text-on-surface mb-4">可接任務</h2>
-    <div className="space-y-4">
-      {quests.map((quest) => (
-        <SwipeableQuest 
-          key={quest.id} 
-          quest={quest} 
-          onComplete={onCompleteQuest} 
-          specialStyle={quest.id === 'premium'} 
-        />
-      ))}
+const QuestsPage = ({ quests, onCompleteQuest }) => {
+  const [openQuestId, setOpenQuestId] = useState(null);
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-on-surface mb-4">可接任務</h2>
+      <div className="space-y-3">
+        {quests.map((quest) => (
+          <QuestCard
+            key={quest.id}
+            quest={quest}
+            onComplete={onCompleteQuest}
+            specialStyle={quest.id === 'premium'}
+            isOpen={openQuestId === quest.id}
+            onToggle={() => setOpenQuestId(openQuestId === quest.id ? null : quest.id)}
+          />
+        ))}
+      </div>
     </div>
-  </div>
-);
+};
 
 const HistoryPage = ({ history, onUndo }) => (
   <div className="space-y-6">
