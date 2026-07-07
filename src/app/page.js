@@ -261,6 +261,7 @@ const QuestsPage = ({ quests, onCompleteQuest }) => {
         ))}
       </div>
     </div>
+  );
 };
 
 const HistoryPage = ({ history, onUndo }) => (
