@@ -193,7 +193,18 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
             <span>{percentage}%</span>
           </div>
           <div className="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden">
-            <div className="h-full bg-primary-container traconst QuestCard = ({ quest, onComplete, specialStyle, isOpen, onToggle }) => {
+            <div className="h-full bg-primary-container transition-all duration-700" style={{ width: `${percentage}%` }}></div>
+          </div>
+          <p className="text-on-surface-variant text-sm mt-1 italic">
+            "持續保持，第三天起每次可獲額外加給！"
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const QuestCard = ({ quest, onComplete, specialStyle, isOpen, onToggle }) => {
   return (
     <div className="rounded-xl overflow-hidden">
       {/* Main card row */}
