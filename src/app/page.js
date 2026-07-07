@@ -3,13 +3,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 const ALL_QUESTS = [
+  { id: 6, title: '洗碗盤', reward: 50, icon: 'flatware' },
+  { id: 3, title: '曬衣服', reward: 20, icon: 'wb_sunny' },
+  { id: 5, title: '拖地板', reward: 20, icon: 'mop' },
+  { id: 7, title: '倒垃圾', reward: 20, icon: 'delete' },
   { id: 1, title: '洗衣服', reward: 15, icon: 'local_laundry_service' },
   { id: 2, title: '拿衣服', reward: 15, icon: 'checkroom' },
-  { id: 3, title: '曬衣服', reward: 20, icon: 'wb_sunny' },
   { id: 4, title: '吸地板', reward: 15, icon: 'vacuum' },
-  { id: 5, title: '拖地板', reward: 20, icon: 'mop' },
-  { id: 6, title: '洗碗盤', reward: 50, icon: 'flatware' },
-  { id: 7, title: '倒垃圾', reward: 20, icon: 'delete' },
   { id: 8, title: '整理', reward: 10, icon: 'inventory_2' },
   { id: 'premium', title: '獲得獎狀', reward: 100, icon: 'workspace_premium', isRepeatable: true },
 ];
@@ -85,9 +85,6 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
     <div className="space-y-6">
       <section>
         <div className="bg-gradient-to-br from-[#1E293B] to-[#0F172A] p-5 rounded-xl border border-outline-variant relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-5 opacity-5 group-hover:opacity-10 transition-opacity">
-            <Icon name="payments" filled className="text-[100px] text-primary-container" />
-          </div>
           {/* Two stats side by side */}
           <div className="flex items-stretch gap-4">
             <div className="flex-1">
@@ -98,7 +95,6 @@ const DashboardPage = ({ totalEarnings, pendingRewards, dishwashStats = { streak
             <div className="flex-1">
               <p className="text-xs font-semibold text-on-surface-variant mb-1">待領取</p>
               <div className="flex items-center gap-1.5">
-                <Icon name="account_balance_wallet" filled className="text-primary-container text-[20px]" />
                 <h2 className="text-4xl font-bold text-on-surface leading-none">${pendingRewards.toFixed(0)}</h2>
               </div>
             </div>
