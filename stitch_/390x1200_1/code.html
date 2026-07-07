@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-Hant" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=390, height=1200, initial-scale=1.0" name="viewport"/>
+<title>Chore Quest - 規則與設定</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#382f25",
+                    "surface-container-highest": "#3c3329",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "background": "#19120a",
+                    "surface": "#19120a",
+                    "inverse-surface": "#f0e0d1",
+                    "surface-bright": "#41382e",
+                    "primary": "#ffc174",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed": "#d8e3fb",
+                    "inverse-primary": "#855300",
+                    "surface-dim": "#19120a",
+                    "primary-fixed": "#ffddb8",
+                    "on-tertiary-container": "#004966",
+                    "on-background": "#f0e0d1",
+                    "on-primary-fixed-variant": "#653e00",
+                    "surface-container-high": "#31281f",
+                    "on-surface": "#f0e0d1",
+                    "error": "#ffb4ab",
+                    "on-tertiary": "#00344a",
+                    "on-secondary": "#263143",
+                    "surface-tint": "#ffb95f",
+                    "on-secondary-container": "#aeb9d0",
+                    "primary-fixed-dim": "#ffb95f",
+                    "on-surface-variant": "#d8c3ad",
+                    "on-error": "#690005",
+                    "tertiary-fixed": "#c5e7ff",
+                    "on-tertiary-fixed": "#001e2d",
+                    "on-primary": "#472a00",
+                    "outline": "#a08e7a",
+                    "surface-container-lowest": "#140d06",
+                    "primary-container": "#f59e0b",
+                    "error-container": "#93000a",
+                    "secondary-container": "#3e495d",
+                    "secondary": "#bcc7de",
+                    "on-primary-fixed": "#2a1700",
+                    "on-tertiary-fixed-variant": "#004c6a",
+                    "surface-container-low": "#221a12",
+                    "tertiary-fixed-dim": "#7fd0ff",
+                    "on-secondary-fixed": "#111c2d",
+                    "surface-variant": "#3c3329",
+                    "on-primary-container": "#613b00",
+                    "tertiary": "#8fd5ff",
+                    "surface-container": "#261e15",
+                    "outline-variant": "#534434",
+                    "tertiary-container": "#1abdff",
+                    "on-secondary-fixed-variant": "#3c475a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "sm": "8px",
+                    "margin-mobile": "16px",
+                    "xl": "32px",
+                    "margin-desktop": "48px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Sora"],
+                    "headline-lg": ["Sora"],
+                    "headline-md": ["Sora"],
+                    "label-md": ["Sora"],
+                    "headline-lg-mobile": ["Sora"],
+                    "label-sm": ["Sora"],
+                    "body-md": ["Sora"],
+                    "body-lg": ["Sora"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #19120a;
+            color: #f0e0d1;
+            width: 390px;
+            height: 1200px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+        .glow-amber {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+        }
+        .glass-card {
+            background: #263143;
+            border: 1px solid #3e495d;
+            backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-glow {
+            box-shadow: 0 -4px 10px rgba(245, 158, 11, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background border-b border-outline-variant z-50 flex justify-between items-center px-margin-mobile py-sm">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of an adventurer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAITz3-i3BMXZzpMfiU2xOaKdx7CZuIeUToN9VJfiaMuPRGgtSwqh7Nq0rEjztWeoTdX9ZUM1--8euNo33AsMrTXnSDWUv9Y9fMZInwcX1mYnYt2j9QnO46-pTFBDTkRNHfsMWxcqaCU3kl5UsD7OppdTQZFpwdD4ZtpB9Ua_yAurMQWXTmM5VKT2XUZ2BzPKuHMVb7d4_byNv5WU_k9H8vay-SqltmJm_z8tBCHz3hmiT4-JEKa0LHwfQFiNXQkW8VLO2phGjxqRo"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Chore Quest</h1>
+</div>
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="px-margin-mobile pt-lg space-y-xl">
+<!-- Rewards Rules (Quest List) -->
+<section class="space-y-lg">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">swords</span>
+<h3 class="font-headline-md text-headline-md">獎勵規則</h3>
+</div>
+<div class="grid grid-cols-1 gap-lg">
+<!-- Dishwashing -->
+<div class="glass-card rounded-xl p-md flex justify-between items-center group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">flatware</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">洗碗</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">完成廚房清理</p>
+</div>
+</div>
+<div class="text-primary font-bold text-headline-md">+50</div>
+</div>
+<!-- Laundry -->
+<div class="glass-card rounded-xl p-md flex justify-between items-center group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">local_laundry_service</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">洗衣服</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">啟動洗衣程序</p>
+</div>
+</div>
+<div class="text-primary font-bold text-headline-md">+15</div>
+</div>
+<!-- Vacuuming -->
+<div class="glass-card rounded-xl p-md flex justify-between items-center group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">vacuum</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">吸塵</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">全屋地板除塵</p>
+</div>
+</div>
+<div class="text-primary font-bold text-headline-md">+20</div>
+</div>
+<!-- Picking up clothes -->
+<div class="glass-card rounded-xl p-md flex justify-between items-center group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">checkroom</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">收衣服</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">整理散落衣物</p>
+</div>
+</div>
+<div class="text-primary font-bold text-headline-md">+15</div>
+</div>
+<!-- Hanging clothes -->
+<div class="glass-card rounded-xl p-md flex justify-between items-center group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">dry_cleaning</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">晾衣服</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">完成洗滌後掛晾</p>
+</div>
+</div>
+<div class="text-primary font-bold text-headline-md">+30</div>
+</div>
+<!-- Mopping -->
+<div class="glass-card rounded-xl p-md flex justify-between items-center group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">mop</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">拖地</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">深層清潔地板</p>
+</div>
+</div>
+<div class="text-primary font-bold text-headline-md">+20</div>
+</div>
+<!-- Certificate -->
+<div class="glass-card rounded-xl p-md flex justify-between items-center border-primary group hover:bg-primary-container/10 transition-all cursor-pointer glow-amber">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-bold">獲得證書</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">晉升至進階等級</p>
+</div>
+</div>
+<div class="text-primary font-bold text-headline-md">+100</div>
+</div>
+</div>
+</section>
+<!-- System Settings -->
+<section class="space-y-lg pt-xl">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">settings</span>
+<h3 class="font-headline-md text-headline-md">系統設定</h3>
+</div>
+<div class="glass-card rounded-xl divide-y divide-outline-variant overflow-hidden">
+<!-- Theme Toggle -->
+<div class="p-lg flex justify-between items-center hover:bg-surface-container/50 transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+<div>
+<p class="font-label-md text-label-md">深色模式</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">調整介面視覺外觀</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Language Info -->
+<div class="p-lg flex justify-between items-center hover:bg-surface-container/50 transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">translate</span>
+<div>
+<p class="font-label-md text-label-md">語言設定</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">繁體中文</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-[390px] flex justify-around items-center px-gutter py-xs bg-surface-container border-t border-outline-variant shadow-lg z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/50 transition-colors active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/50 transition-colors active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">swords</span>
+<span class="font-label-sm text-label-sm">Quests</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/50 transition-colors active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active-nav-glow active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple theme toggle simulation visual state
+        const themeToggle = document.querySelector('input[type="checkbox"]');
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                document.documentElement.classList.add('dark');
+            } else {
+                // Keep dark for the "Glowmorphism" aesthetic consistency as requested previously
+            }
+        });
+    </script>
+</body></html>

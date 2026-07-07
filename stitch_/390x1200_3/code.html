@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-Hant" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=390, height=1200, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#c5e7ff",
+                    "tertiary-container": "#1abdff",
+                    "inverse-primary": "#855300",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "on-tertiary-fixed": "#001e2d",
+                    "primary-fixed": "#ffddb8",
+                    "primary-fixed-dim": "#ffb95f",
+                    "tertiary": "#8fd5ff",
+                    "background": "#19120a",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#613b00",
+                    "outline-variant": "#534434",
+                    "primary-container": "#f59e0b",
+                    "on-secondary": "#263143",
+                    "surface-dim": "#19120a",
+                    "on-error": "#690005",
+                    "primary": "#ffc174",
+                    "secondary": "#bcc7de",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "surface-container": "#261e15",
+                    "secondary-container": "#3e495d",
+                    "error-container": "#93000a",
+                    "on-surface-variant": "#d8c3ad",
+                    "on-secondary-fixed": "#111c2d",
+                    "outline": "#a08e7a",
+                    "on-tertiary-fixed-variant": "#004c6a",
+                    "surface-container-low": "#221a12",
+                    "surface-container-high": "#31281f",
+                    "inverse-on-surface": "#382f25",
+                    "on-surface": "#f0e0d1",
+                    "surface-container-highest": "#3c3329",
+                    "on-background": "#f0e0d1",
+                    "on-secondary-container": "#aeb9d0",
+                    "surface-tint": "#ffb95f",
+                    "surface-container-lowest": "#140d06",
+                    "on-primary-fixed": "#2a1700",
+                    "surface-variant": "#3c3329",
+                    "inverse-surface": "#f0e0d1",
+                    "secondary-fixed": "#d8e3fb",
+                    "tertiary-fixed-dim": "#7fd0ff",
+                    "on-tertiary-container": "#004966",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#653e00",
+                    "surface": "#19120a",
+                    "on-tertiary": "#00344a",
+                    "on-primary": "#472a00",
+                    "surface-bright": "#41382e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Sora"],
+                    "headline-lg-mobile": ["Sora"],
+                    "label-sm": ["Sora"],
+                    "body-lg": ["Sora"],
+                    "headline-md": ["Sora"],
+                    "label-md": ["Sora"],
+                    "display-lg": ["Sora"],
+                    "headline-lg": ["Sora"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #19120a;
+            color: #f0e0d1;
+            font-family: 'Sora', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            width: 390px;
+            min-height: 1200px;
+            margin: 0 auto;
+        }
+        .glass-card {
+            background: rgba(60, 51, 41, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid #534434;
+        }
+        .primary-glow:hover {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background border-b border-outline-variant flex justify-between items-center px-margin-mobile py-sm z-50">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlxfXwb977o78nUAO09Iwji1muV0P3DyK_q9QmBpc10yhLTBDJO7BpShufrXpx1jaZ7pckEaVkgcQ3ovLd6ytrQcCRbxmfNU1LKHUiqvnByETaSX4hDeRrDf4LEE8ERIFsOmsr3Ezeu4KrQmXpCrU7wKynoY0L3bAA24wscH0PkyrCPpeTbQflmyssNliorp7RQ8VVyKBa9sSndVScXvYzVzVb2vpq-wp5SbncdXUcsbmg5BDWvzZdbGP-Harx7vS4EVI3C4sDUMU"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Chore Quest</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="px-margin-mobile pt-lg space-y-xl">
+<!-- Quest List -->
+<section>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-md">可接任務</h2>
+<div class="space-y-md">
+<!-- Laundry Task -->
+<div class="glass-card p-md rounded-xl flex items-center gap-md hover:border-primary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary border border-outline-variant">
+<span class="material-symbols-outlined">local_laundry_service</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">洗衣服</h4>
+<div class="text-primary font-label-sm text-label-sm">$10</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Picking up clothes -->
+<div class="glass-card p-md rounded-xl flex items-center gap-md hover:border-primary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg overflow-hidden border border-outline-variant">
+<img alt="Picking up clothes" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtrr2RCMpAJiy8kAJVCiMwJ9WTcVFructDli5m39Hq4cQZ5exLtcjjrhxsqntpIqfj4-TNgewdDUxfWuoRHk2jgB1Mf-h_o10_jcWXNkmGS-zwxAtBivz8xti8uzNLvCx1w4tqM-jSRRHCCAc70pOdokITiIn93odj4kLNjc3SOKSncSlB9TK0zxMTq6-h9wUibYf76kiKj_FwFpfcfVGqkzMDnffRnncE-p3LxhWyf8Wm-1KSUbZkXh-g"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">收衣服</h4>
+<div class="text-primary font-label-sm text-label-sm">$10</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Hanging clothes -->
+<div class="glass-card p-md rounded-xl flex items-center gap-md hover:border-primary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg overflow-hidden border border-outline-variant">
+<img alt="Hanging clothes" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLst4RexNGmKIzvoPFVCl5CEkGcsvtYTk2ZQ-I-59WvOXVQxygAoSCs7qESy3vPAsGB7LG9Wtc6cAAOfBRSz2EIZBftXVQVMW6WXyynvzF1Xs8Nvb1kuxNhBhuxdLG7_syQsPWgJ2vuJ3UUhhr1Q0DCKM9XToS-V0CY8QG-nW96zVOME0knHFz5aXVGL779QFc3RjPiH_KLm8xf151eLLqJ8TRnrC1bROb1_QNMe8RkRHhIlbbAD1lrGmvk"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">晾衣服</h4>
+<div class="text-primary font-label-sm text-label-sm">$30</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Vacuuming Task -->
+<div class="glass-card p-md rounded-xl flex items-center gap-md hover:border-primary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary border border-outline-variant">
+<span class="material-symbols-outlined">vacuum</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">吸地</h4>
+<div class="text-primary font-label-sm text-label-sm">$10</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Mopping Task -->
+<div class="glass-card p-md rounded-xl flex items-center gap-md hover:border-primary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary border border-outline-variant">
+<span class="material-symbols-outlined">mop</span>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">拖地</h4>
+<div class="text-primary font-label-sm text-label-sm">$20</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Certificate Achievement -->
+<div class="glass-card p-md rounded-xl flex items-center gap-md hover:border-tertiary/50 transition-colors group border-tertiary-container/30">
+<div class="w-12 h-12 rounded-lg overflow-hidden border border-tertiary-container/50">
+<img alt="Certificate" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLv1GwYMS83Ud9mIsTolcIZImahJbTZppPEKA5ueSm7qIqjhNjcxgUEtqS9bDCmAMLHJ_H_8WRMX1huqykULoNvhZjQK2lsewFlDJTlviRg33GiVTL5LzjL3-8uMUqdGVJ3swmUxE_5MrGVJGXwjIu42nIde8pEqC7U2_Tk2o1JKvJYj9HtYquXy3glGLt_YUm86MHdz1liXW7A6i-ZDaYqcf9yASCfbdfY4nKRlfL4Jhs5AkEDHfHOYBco"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface">獲得獎狀</h4>
+<div class="text-tertiary font-label-sm text-label-sm">$100</div>
+</div>
+<span class="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+</section>
+<!-- Stats Overview Card -->
+<section class="mt-xl">
+<div class="glass-card p-lg rounded-2xl border-outline-variant/50 relative overflow-hidden">
+<div class="flex flex-col items-center gap-lg">
+<div class="space-y-sm text-center">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">本週累計收益</p>
+<h2 class="font-display-lg text-display-lg text-primary">$230</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">你已經完成了 12 項任務！繼續努力！</p>
+</div>
+<div class="w-32 h-32 rounded-full border-4 border-outline-variant flex items-center justify-center relative">
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-primary" cx="64" cy="64" fill="transparent" r="56" stroke="currentColor" stroke-dasharray="351.8" stroke-dashoffset="88" stroke-width="8"></circle>
+</svg>
+<span class="font-headline-lg text-headline-lg text-on-surface">75%</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-[390px] mx-auto right-0 flex justify-around items-center px-gutter py-xs bg-surface-container border-t border-outline-variant shadow-lg z-50 rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/50 transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:scale-90">
+<span class="material-symbols-outlined" data-icon="sword" style="font-variation-settings: 'FILL' 1;">swords</span>
+<span class="font-label-sm text-label-sm">Quests</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/50 transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/50 transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</div>
+</nav>
+<script>
+    // Subtle interactivity
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.style.transform = 'scale(0.98)';
+            setTimeout(() => card.style.transform = 'scale(1)', 100);
+        });
+    });
+</script>
+</body></html>

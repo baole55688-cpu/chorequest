@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="zh-Hant"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chore Quest - 歷史與紀錄</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #19120a;
+            color: #f0e0d1;
+            -webkit-font-smoothing: antialiased;
+            /* Target dimensions for mobile view */
+            width: 100%;
+            max-width: 390px;
+            margin: 0 auto;
+            min-height: 1200px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-amber {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, #f59e0b 0%, #3c3329 100%);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#c5e7ff",
+                    "tertiary-container": "#1abdff",
+                    "inverse-primary": "#855300",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "on-tertiary-fixed": "#001e2d",
+                    "primary-fixed": "#ffddb8",
+                    "primary-fixed-dim": "#ffb95f",
+                    "tertiary": "#8fd5ff",
+                    "background": "#19120a",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#613b00",
+                    "outline-variant": "#534434",
+                    "primary-container": "#f59e0b",
+                    "on-secondary": "#263143",
+                    "surface-dim": "#19120a",
+                    "on-error": "#690005",
+                    "primary": "#ffc174",
+                    "secondary": "#bcc7de",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "surface-container": "#261e15",
+                    "secondary-container": "#3e495d",
+                    "error-container": "#93000a",
+                    "on-surface-variant": "#d8c3ad",
+                    "on-secondary-fixed": "#111c2d",
+                    "outline": "#a08e7a",
+                    "on-tertiary-fixed-variant": "#004c6a",
+                    "surface-container-low": "#221a12",
+                    "surface-container-high": "#31281f",
+                    "inverse-on-surface": "#382f25",
+                    "on-surface": "#f0e0d1",
+                    "surface-container-highest": "#3c3329",
+                    "on-background": "#f0e0d1",
+                    "on-secondary-container": "#aeb9d0",
+                    "surface-tint": "#ffb95f",
+                    "surface-container-lowest": "#140d06",
+                    "on-primary-fixed": "#2a1700",
+                    "surface-variant": "#3c3329",
+                    "inverse-surface": "#f0e0d1",
+                    "secondary-fixed": "#d8e3fb",
+                    "tertiary-fixed-dim": "#7fd0ff",
+                    "on-tertiary-container": "#004966",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#653e00",
+                    "surface": "#19120a",
+                    "on-tertiary": "#00344a",
+                    "on-primary": "#472a00",
+                    "surface-bright": "#41382e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "margin-desktop": "48px",
+                    "md": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Sora"],
+                    "headline-lg-mobile": ["Sora"],
+                    "label-sm": ["Sora"],
+                    "body-lg": ["Sora"],
+                    "headline-md": ["Sora"],
+                    "label-md": ["Sora"],
+                    "display-lg": ["Sora"],
+                    "headline-lg": ["Sora"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="flex flex-col min-h-[1200px]">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky flex justify-between items-center px-margin-mobile py-sm z-50 bg-background/95 backdrop-blur border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A stylized portrait of a young professional in a modern digital art style, lit by a warm golden glow. The background is a deep, high-contrast slate navy with subtle RPG-inspired particle effects. The lighting is dramatic and cinematic, highlighting the adventurous and precise brand identity of Chore Quest with sharp focus and high fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBma7VXQUKvUxNfjhtdHoPSIIyQDy8nmC73dUCbPyTzOsN_jX1r0nab6UICeO3JpGbeNGA5hWiSNaw-56A03HpUrLI3RIMeHyw40sFc9UACejY6f-2ymhr3q_EVXUrjTwutAGXq3C5GCeOM8hRJ7EL9MQAP7UXcn4nlfgvOnwtxoq-op5xDK-WCX-43qB1d44wDA1nCrfnyVbImIVJjyynmxunFPaU35AN4wokTINGBZJALmZmGr3rgmsb0_9FiW-xfi1yJtuGF-d0"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Chore Quest</h1>
+</div>
+<button class="material-symbols-outlined text-primary p-2 hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="notifications">notifications</button>
+</header>
+<main class="flex-grow px-margin-mobile pt-lg pb-32 w-full">
+<!-- Summary Dashboard -->
+<section class="mb-xl">
+<div class="p-lg bg-surface-container-high rounded-xl border border-outline-variant relative overflow-hidden flex flex-col gap-md">
+<div class="relative z-10">
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">累計總收益</p>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-display-lg text-primary">$</span>
+<span class="font-display-lg text-display-lg text-primary tracking-tighter" id="total-earnings">12,480</span>
+</div>
+</div>
+<div class="relative z-10 flex gap-md">
+<div class="flex-1 bg-surface-container-highest/50 px-md py-sm rounded-lg border border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-on-surface-variant">本月增長</p>
+<p class="font-headline-md text-headline-md text-primary-container">+$1,240</p>
+</div>
+<div class="flex-1 bg-surface-container-highest/50 px-md py-sm rounded-lg border border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-on-surface-variant">完成任務</p>
+<p class="font-headline-md text-headline-md text-secondary">142</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Activity Timeline Section -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">最近活動紀錄</h2>
+<button class="font-label-md text-label-md text-primary flex items-center gap-xs hover:opacity-80 transition-opacity">
+                    全部紀錄 <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="relative space-y-lg pl-8">
+<!-- Vertical Line -->
+<div class="absolute left-3.5 top-2 bottom-2 w-0.5 timeline-line opacity-20"></div>
+<!-- Activity Item 1 -->
+<div class="relative group">
+<div class="absolute -left-8 top-1.5 w-7 h-7 rounded-full bg-primary-container border-4 border-background z-10 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[14px] text-on-primary-container" data-icon="restaurant" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div class="p-md bg-surface-container rounded-xl border border-outline-variant hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="pr-2">
+<h4 class="font-label-md text-label-md text-on-surface mb-xs leading-tight">3 天洗碗連勝挑戰</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">連續三日完成餐後清潔任務</p>
+</div>
+<span class="font-headline-md text-headline-md text-primary shrink-0">+$150</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex-grow bg-outline-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full rounded-full"></div>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">已達成</span>
+</div>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="relative group">
+<div class="absolute -left-8 top-1.5 w-7 h-7 rounded-full bg-secondary-container border-4 border-background z-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container" data-icon="chair">chair</span>
+</div>
+<div class="p-md bg-surface-container rounded-xl border border-outline-variant hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="pr-2">
+<h4 class="font-label-md text-label-md text-on-surface mb-xs leading-tight">客廳深度清潔</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">吸塵、除塵與傢俱整理</p>
+</div>
+<span class="font-headline-md text-headline-md text-primary shrink-0">+$80</span>
+</div>
+<div class="flex items-center text-on-surface-variant gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">2 小時前</span>
+</div>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="relative group">
+<div class="absolute -left-8 top-1.5 w-7 h-7 rounded-full bg-secondary-container border-4 border-background z-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container" data-icon="delete">delete</span>
+</div>
+<div class="p-md bg-surface-container rounded-xl border border-outline-variant hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="pr-2">
+<h4 class="font-label-md text-label-md text-on-surface mb-xs leading-tight">垃圾處理與分類</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">資源回收與垃圾清理</p>
+</div>
+<span class="font-headline-md text-headline-md text-primary shrink-0">+$30</span>
+</div>
+<div class="flex items-center text-on-surface-variant gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">今天 早上 08:30</span>
+</div>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="relative group">
+<div class="absolute -left-8 top-1.5 w-7 h-7 rounded-full bg-surface-variant border-4 border-background z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="local_laundry_service">local_laundry_service</span>
+</div>
+<div class="p-md bg-surface-container-low rounded-xl border border-outline-variant/50 opacity-70">
+<div class="flex justify-between items-start mb-sm">
+<div class="pr-2">
+<h4 class="font-label-md text-label-md text-on-surface mb-xs leading-tight">衣物洗滌與摺疊</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">完成 2 籃衣物清洗</p>
+</div>
+<span class="font-headline-md text-headline-md text-primary shrink-0">+$50</span>
+</div>
+<div class="flex items-center text-on-surface-variant gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm">昨天</span>
+</div>
+</div>
+</div>
+<!-- Extra space for long scroll requested -->
+<div class="h-64 flex flex-col items-center justify-center text-on-surface-variant/30 italic">
+<span class="material-symbols-outlined mb-2" data-icon="auto_awesome">auto_awesome</span>
+<p class="font-label-sm">查看更多歷史紀錄...</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] flex justify-around items-center px-gutter py-xs bg-surface-container/95 backdrop-blur border-t border-outline-variant shadow-2xl z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">總覽</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="sword">swords</span>
+<span class="font-label-sm text-label-sm">任務</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="history" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-sm text-label-sm font-bold">歷史</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">設定</span>
+</a>
+</nav>
+<script>
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            obj.innerHTML = value.toLocaleString();
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const earningsDisplay = document.getElementById('total-earnings');
+        if (earningsDisplay) {
+            animateValue(earningsDisplay, 0, 12480, 1500);
+        }
+    });
+</script>
+</body></html>
